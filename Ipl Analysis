@@ -1,0 +1,96 @@
+import java.util.*;
+class IPL
+{
+    Scanner sc=new Scanner(System.in);
+    String team[] = new String[10];
+    int points[] = new int[10];
+    int result[][]= new int[10][6];
+    public void input()
+    {
+        for(int i=0;i<10;i++)
+        {
+            System.out.println("Enter name of team");
+            team[i]=sc.next();
+            System.out.println("Enter points of team");
+            points[i]=sc.nextInt();
+            System.out.println("Enter wins and losses");
+            System.out.println("1=losses,2=win");
+            for(int j=0;j<5;j++)
+            {
+                result[i][j]=sc.nextInt();
+            }
+        }
+    }
+    public void loss2()
+    {  
+        for(int i=0;i<10;i++)
+        {
+            for(int j=0;j<5;j++)
+            {
+                if((result[i][j]==1)&&(result[i][j+1]==1))
+                {
+                    System.out.println(team[i]);
+                }
+            }
+        }
+    }
+    public void nconsicutive()
+    {
+        System.out.println("Enter n consicutive");
+        int n= sc.nextInt();
+        System.out.println("Select from win=2 or losses=1");
+        int key=sc.nextInt();
+        int temp[]=new int[10];int c=0,a=0;
+        for(int i=0;i<10;i++)
+        {
+            if(key==1){ 
+            for(int j=0;j<5;j++)
+            {              
+                        for(int x=j;x<j+n;x++)
+                        {
+                            if(result[i][x]==1)
+                            {
+                                c++;
+                            }
+                        }
+            }
+            if(c==n)
+            {
+                temp[a]=i;
+                a++;
+            }
+        }
+        if(key==2){ 
+            for(int j=0;j<5;j++)
+            {              
+                        for(int x=j;x<j+n;x++)
+                        {
+                            if(result[i][x]==2)
+                            {
+                                c++;
+                            }
+                        }
+            }
+            if(c==n)
+            {
+                temp[a]=i;
+                a++;
+            }
+        }
+    }
+    System.out.println("Team which have consicutive choice are");
+    int avg=0,sum=0;
+    for(int k=0;k<10;k++)
+    {
+        System.out.println(team[temp[k]]);
+        sum=points[temp[k]]+sum;
+    }
+    System.out.println("Avg point of teams are"+(sum/a));
+}
+    void main()
+    {
+        input(); //for input purpose
+        loss2(); //for finding teams with 2 consicutive losses
+        nconsicutive(); //for entering n value and finding teams and avg point according to user choice
+    }
+}
